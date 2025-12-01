@@ -1,0 +1,254 @@
+{
+  "input": {
+    "workflow": {
+      "298": {
+        "inputs": {
+          "samples": [
+            "753",
+            0
+          ],
+          "vae": [
+            "710",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "693": {
+        "inputs": {
+          "text": "Hyperrealistic macro photograph of a team of tiny bakers—each precisely 2 inches tall—collaborating on an enormous, golden-brown croissant with flaky, layered textures. The bakers are engaged in dynamic, detailed actions: one uses a miniature wooden bucket to spread rich, creamy butter between the croissant’s layers, another climbs a thin rope ladder to evenly pipe smooth, glossy chocolate filling onto the top, and a third brushes a light egg wash with a tiny pastry brush. The scene is bathed in warm, soft kitchen lighting with cinematic depth—subtle highlights on the croissant’s golden crust, gentle shadows that emphasize texture, and a soft glow from overhead pendant lights. Floating flour dust particles catch the light, adding a sense of movement and realism, while tiny details like the bakers’ stitched cloth aprons, smudged flour on their faces, the rough wood of the worktable, and the slight sheen of melted butter on the croissant are rendered with ultra-precision. Ultra-detailed, 8K resolution, photorealistic textures, sharp focus on the bakers and croissant, shallow depth of field to blur the background slightly, rich warm color palette, lifelike proportions, and a cozy, whimsical atmosphere that balances realism with charm.",
+          "clip": [
+            "741",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "Positive"
+        }
+      },
+      "694": {
+        "inputs": {
+          "value": 3.5,
+          "model": [
+            "701",
+            0
+          ],
+          "positive": [
+            "693",
+            0
+          ],
+          "negative": [
+            "728",
+            0
+          ]
+        },
+        "class_type": "CFGGuider",
+        "_meta": {
+          "title": "CFGGuider"
+        }
+      },
+      "700": {
+        "inputs": {
+          "text": "euler"
+        },
+        "class_type": "KSamplerSelect",
+        "_meta": {
+          "title": "KSamplerSelect"
+        }
+      },
+      "701": {
+        "inputs": {
+          "value": 1,
+          "model": [
+            "747",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "Flow Shift"
+        }
+      },
+      "710": {
+        "inputs": {
+          "text": "pixel_space"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "718": {
+        "inputs": {
+          "value": 918944845349229
+        },
+        "class_type": "RandomNoise",
+        "_meta": {
+          "title": "SEED"
+        }
+      },
+      "728": {
+        "inputs": {
+          "text": "This low quality greyscale unfinished sketch is inaccurate and flawed. The image is very blurred and lacks detail with excessive chromatic aberrations and artifacts. The image is overly saturated with excessive bloom. It has a toony aesthetic with bold outlines and flat colors. ",
+          "clip": [
+            "741",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "Negative"
+        }
+      },
+      "731": {
+        "inputs": {
+          "filename": "Chroma1-Radiance-v0.3.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "733": {
+        "inputs": {
+          "filename": "t5xxl_fp8_e4m3fn_scaled.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "740": {
+        "inputs": {
+          "filename_prefix": "Darkpixel",
+          "images": [
+            "298",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "SaveImage"
+        }
+      },
+      "741": {
+        "inputs": {
+          "value": 0,
+          "clip": [
+            "733",
+            0
+          ]
+        },
+        "class_type": "T5TokenizerOptions",
+        "_meta": {
+          "title": "T5TokenizerOptions"
+        }
+      },
+      "747": {
+        "inputs": {
+          "value": true,
+          "model": [
+            "731",
+            0
+          ]
+        },
+        "class_type": "ChromaRadianceOptions",
+        "_meta": {
+          "title": "ChromaRadianceOptions"
+        }
+      },
+      "751": {
+        "inputs": {
+          "value": 30,
+          "model": [
+            "701",
+            0
+          ]
+        },
+        "class_type": "BetaSamplingScheduler",
+        "_meta": {
+          "title": "BetaSamplingScheduler"
+        }
+      },
+      "753": {
+        "inputs": {
+          "noise": [
+            "718",
+            0
+          ],
+          "guider": [
+            "694",
+            0
+          ],
+          "sampler": [
+            "700",
+            0
+          ],
+          "sigmas": [
+            "751",
+            0
+          ],
+          "latent_image": [
+            "760",
+            0
+          ]
+        },
+        "class_type": "SamplerCustomAdvanced",
+        "_meta": {
+          "title": "SamplerCustomAdvanced"
+        }
+      },
+      "760": {
+        "inputs": {
+          "value": 1024
+        },
+        "class_type": "EmptyChromaRadianceLatentImage",
+        "_meta": {
+          "title": "EmptyChromaRadianceLatentImage"
+        }
+      },
+      "761": {
+        "inputs": {
+          "upscale_model": [
+            "762",
+            0
+          ],
+          "image": [
+            "298",
+            0
+          ]
+        },
+        "class_type": "ImageUpscaleWithModel",
+        "_meta": {
+          "title": "ImageUpscaleWithModel"
+        }
+      },
+      "762": {
+        "inputs": {
+          "model_name": "RealESRGAN_x4plus.safetensors"
+        },
+        "class_type": "UpscaleModelLoader",
+        "_meta": {
+          "title": "UpscaleModelLoader"
+        }
+      },
+      "764": {
+        "inputs": {
+          "filename_prefix": "Darkpixel_x4plus",
+          "images": [
+            "761",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "SaveImage"
+        }
+      }
+    }
+  }
+}
